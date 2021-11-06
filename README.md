@@ -1,5 +1,8 @@
 # Desafio AWS BGC
 
+## API Produção
+  - https://a59pvcoyoi.execute-api.us-east-1.amazonaws.com/
+
 ## Descrição
   Projetar uma API através de um modelo de execução __Serverless__ com apoio de tecnologias Amazon AWS, onde esta API forneça
   um payload de 3 produtos principais, com o conceito de __Web Scrapper__, do E-commerce escolhido da __Aduana__.
@@ -20,6 +23,7 @@
   - AWS Lambda
   - AWS API Gateway
   - AWS DynamoDB
+  - AWS StepFunction
   - Puppeteer / "puppeteer-core" / "chrome-aws-lambda"
     - Utilizado as 3 bibliotecas que servem como processos automátizados para entrar em sites
       e no projeto para fazer o web scrapper
@@ -76,7 +80,7 @@
 
 ## Rotas API
   - Para salvar e listar 3 produtos da página
-    - /api/products (GET)
+    - /api/products/finds (GET)
     ```
       // Resposta
       {
@@ -88,7 +92,7 @@
       }
     ```
   - Para fazer a busca dos produtos
-    - /api/products (GET)
+    - /api/products/maps (GET)
     ```
       // Resposta
       {
@@ -101,6 +105,17 @@
     ```
 
 ## Bibliografia
-  - https://www.serverless.com/framework/docs (Para conexão dos serviços AWS ao Serverless Framework)
-  - https://docs.aws.amazon.com/pt_br/index.html?nc2=h_ql_doc  (Todos os serviços AWS)
-  - 
+  - Documentações
+    - https://www.serverless.com/framework/docs (Para conexão dos serviços AWS ao Serverless Framework)
+    - https://docs.aws.amazon.com/pt_br/index.html?nc2=h_ql_doc  (Todos os serviços AWS)
+    - https://serverless-stack.com/#guide
+  - Vídeos
+    - https://www.youtube.com/watch?v=upbxQek0H1Q&t=85s
+    - https://www.youtube.com/watch?v=jiP45rEOEbA&t=628s
+    - https://www.youtube.com/watch?v=65MK5KqaVh4&t=208s
+  - Comunidades
+    - Stack over flow
+    - DEV community
+    - Github / Github memory
+  - Blogs
+    - Medium
