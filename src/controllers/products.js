@@ -43,6 +43,7 @@ async function findProducts(req, res) {
 async function mapProducts(_req, res) {
   try {
     save().then(async (response) => {
+      const resp = []
       for (let idx = 0; idx < 3; idx++) {
         const productId = response[idx].title.replace(' ', '')
         const title = response[idx].title
@@ -61,10 +62,18 @@ async function mapProducts(_req, res) {
           },
         }
         await dynamoDbClient.put(params).promise()
+
+        resp.push({
+          productId,
+          title,
+          src,
+          oldValue,
+          newValue,
+        })
       }
 
       res.status(201).json({
-        response
+        resp
       })
     })
   } catch (error) {
