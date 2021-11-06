@@ -64,7 +64,7 @@ async function mapProducts(_req, res) {
       }
 
       res.status(201).json({
-        response,
+        response
       })
     })
   } catch (error) {
