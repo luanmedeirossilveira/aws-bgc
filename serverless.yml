@@ -1,0 +1,51 @@
+org: luanmedeirossilveira
+app: aws-desafio-bcg
+service: aws-bgc
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+custom:
+  tableName: 'products-tb-${sls:stage}'
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  lambdaHashingVersion: '20201221'
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ ProductsTable, Arn ]
+  environment:
+    PRODUCTS_TABLE: ${self:custom.tableName}
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - httpApi: '*'
+    timeout: 10    
+
+resources:
+  Resources:
+    ProductsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: productId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: productId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
